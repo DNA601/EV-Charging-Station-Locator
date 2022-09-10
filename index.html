@@ -21,22 +21,18 @@
   </head>
 
   <body>
+    <section class="section columns">
 
-    <!-- Main container -->
-    <nav class="level container">
-      <!-- Left side -->
-      <div class="level-left">
-        <div class="level-item">
-          <a id="locator" class="navbar-item" href="https://bulma.io">
-            <img src="./assets/images/images.png">
-            LOCATOR
+      <div class="column is-two-fifths">
+        <nav class="container block">
+          <a id="locator" style="  font-size: 30px;" class="navbar-item" href="https://bulma.io">
+            <img class="mr-2" src="./assets/images/images.png">
+            STATION LOCATOR
           </a>
-        </div>
-        <div class="level-item">
-          <div class="field has-addons">
-            <p class="control">
+          <div class="field is-grouped">
+            <p class="control is-expanded">
               <input
-                class="input"
+                class="input "
                 type="text"
                 placeholder="Search city or zipcode"
                 id="searchInput">
@@ -47,35 +43,28 @@
               </button>
             </p>
           </div>
+        </nav>
+
+        <div style="height: 90vh; overflow: scroll;">
+          <div class="box " id="bgLocationCard">
+            <p class="has-text-weight-semibold ">Map Selection</p>
+            <p>View a search using the search bar</p>
+            <p>View a saved search</p>
+            <p>View close by searches</p>
+          </div>
+
+          <div id="savedLocations"></div>
+
+          <div class="container">
+            <h2 class="subtitle box mt-5">NEARBY LOCATIONS</h2>
+            <div id='tileCards'></div>
+          </div>
         </div>
-      </div>
-      <!-- Right side -->
-      <div class="level-right">
-        <p class="level-item"><strong>All</strong></p>
-        <p class="level-item"><a>Close By</a></p>
-        <p class="level-item"><a>Previous</a></p>
-      </div>
-    </nav>
 
-    <section class="section">
-
-      <div class="container is-flex is-justify-content-space-between block">
-        <div class="box" id="bgLocationCard">
-          <p>Map Selection</p>
-          <p>View a search using the search bar</p>
-          <p>View a previous search</p>
-          <p>View a close by search</p>
-
-        </div>
-        <div class="is-flex is-flex-direction-column " id="savedLocations"></div>
       </div>
 
-      <div class="container box" id="mapDiv" style="height: 500px; "></div>
-
-      <div class="container">
-        <h2>Nearby Locations</h2>
-        <div id='tileCards'></div>
-      </div>
+      <div class="container box column is-three-fifths" id="mapDiv"
+        style="height: 100vh;"></div>
 
     </section>
 
@@ -83,3 +72,10 @@
   </body>
 
 </html>
+<!-- 
+  limit saved searches to 5
+  limit tile cards to 5
+  make button div look like boxes
+  juice up map
+  //make it look like mapquest //just one side scrolls
+ -->

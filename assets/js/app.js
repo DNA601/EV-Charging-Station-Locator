@@ -103,12 +103,12 @@ function dataDisplay1(arr, price) {
   const BLC = document.createElement('div')
   arr.ev_pricing == null ? price = 'free' : price = arr.ev_pricing
   BLC.innerHTML = `
-      <h4 >${arr.station_name}</h4>
-      <p>${arr.street_address}</p> 
+      <h4>${arr.station_name}</h4>
+      <p><strong>Address: </strong> ${arr.street_address}</p> 
       <p>${arr.city}, ${arr.state}, ${arr.zip}</p> 
-      <p>${arr.station_phone}</p> 
+      <p><strong>Phone: </strong> ${arr.station_phone}</p> 
       <p>🔌 ${arr.ev_connector_types}</p> 
-      <p>${price}</p> 
+      <p><strong>Price: </strong> ${price}</p> 
       `
   bgLocationCard.appendChild(BLC)
   saveStation([arr.station_name, arr.id, arr.zip])
@@ -122,7 +122,8 @@ function dataDisplay5(arr, length) {
   for (let i = 1; i < length; i++) {
     arr[i].ev_pricing == null ? price = 'free' : price = arr[i].ev_pricing
     // create cardTile text
-    const stationInfo = document.createElement('aside')
+    const stationInfo = document.createElement('div')
+    stationInfo.classList.add('box')
     stationInfo.innerHTML = `
     <p>🚘 ${arr[i].distance.toFixed(2)} mi.</p>
     <p>${arr[i].street_address}</p> 
@@ -144,7 +145,6 @@ function dataDisplay5(arr, length) {
     stationInfo.addEventListener('click', (event) => {
       let value = cardBtn.getAttribute('value')
       getApiByID(value)
-      console.log(cardBtn)
       saveStation([cardBtn.textContent, value, cardBtn.getAttribute('datazip')])
     })
   }
@@ -160,9 +160,9 @@ function displaySearches() {
   savedLocations.innerHTML = ''
   for (let i = 0; i < searches.length; i++) {
     const buttonDiv = document.createElement('div')
-    buttonDiv.classList.add('mb-1')
+    buttonDiv.classList.add('mb-1', 'box', 'is-fullwidth')
     const searchItem = document.createElement('button')
-    searchItem.classList.add('button', 'is-link')
+    searchItem.classList.add('button', 'is-link', "mr-1")
     searchItem.textContent = searches[i][0]
     buttonDiv.appendChild(searchItem)
     searchItem.addEventListener('click', () => {
@@ -172,8 +172,7 @@ function displaySearches() {
 
     //create delete button
     const deleteBtn = document.createElement('button')
-    deleteBtn.classList.add("button", "is-danger")
-    deleteBtn.textContent = 'X'
+    deleteBtn.classList.add("delete", "is-large")
     deleteBtn.id = i
     buttonDiv.appendChild(deleteBtn)
     deleteBtn.addEventListener('click', (event) => {
@@ -182,6 +181,10 @@ function displaySearches() {
     })
     savedLocations.appendChild(buttonDiv)
   }
+  const savedHeader = document.createElement('h2')
+  savedHeader.classList.add('subtitle', 'box')
+  savedHeader.textContent = 'SAVED SEARCHES'
+  savedLocations.prepend(savedHeader)
 } displaySearches();
 
 // Delete items from search history
