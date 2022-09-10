@@ -3,7 +3,6 @@ let stationArr = JSON.parse(localStorage.getItem('station')) || []
 const searchInput = document.getElementById('searchInput')
 const bgLocationCard = document.getElementById('bgLocationCard')
 const tileCards = document.getElementById('tileCards')
-const cardBtns = document.getElementsByClassName('cardBtns')
 const savedLocations = document.getElementById('savedLocations')
 const searchSection = document.getElementById('searchSection')
 const mapDiv = document.getElementById('mapDiv')
@@ -11,14 +10,13 @@ let map;
 
 const searchBtn = document.getElementById('searchBtn')
 searchInput.setAttribute('onfocus', "this.value=''")
-
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault()
   getApi(searchInput.value)
   searchInput.value = ''
 })
 
-//1. Retrieve and display station location and retailer information from search bar
+// Retrieve and display station location and retailer information from search bar
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/nearest/
 function getApi(location) {
   const requestUrl = `https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?location=${location}&fuel_type_code='ELEC'&radius=5.0&api_key=${apikey}`
@@ -26,7 +24,7 @@ function getApi(location) {
   fetch(requestUrl)
     .then(function (response) {
       if (!response.ok) {
-        searchInput.value = `invalid city or zipcode`
+        searchInput.value = `INVALID CITY OR ZIPCODE`
         searchInput.setAttribute('style', 'color: red;')
       }
       return response.json();
@@ -42,7 +40,7 @@ function getApi(location) {
     });
 }
 
-//2. Retrieve and display station location and retailer information with card buttons
+// Retrieve and display station location and retailer information with card buttons
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/get/
 function getApiByID(location) {
   const requestUrl = ` https://developer.nrel.gov/api/alt-fuel-stations/v1/${location}.json?api_key=${apikey}`
@@ -106,7 +104,7 @@ function dataDisplay1(arr, price) {
   const BLC = document.createElement('div')
   arr.ev_pricing == null ? price = 'free' : price = arr.ev_pricing
   BLC.innerHTML = `
-      <h4 class='cardBtns'>${arr.station_name}</h4>
+      <h4 >${arr.station_name}</h4>
       <p>${arr.street_address}</p> 
       <p>${arr.city}, ${arr.state}, ${arr.zip}</p> 
       <p>${arr.station_phone}</p> 
@@ -114,7 +112,7 @@ function dataDisplay1(arr, price) {
       <p>${price}</p> 
       `
   bgLocationCard.appendChild(BLC)
-  saveStation([arr.station_name, arr.id, arr.zip])//CHANGED
+  saveStation([arr.station_name, arr.id, arr.zip])
 }
 
 // Create display for station-info in nearby_Locations_section
@@ -126,7 +124,6 @@ function dataDisplay5(arr, length) {
     arr[i].ev_pricing == null ? price = 'free' : price = arr[i].ev_pricing
     // create text
     const stationInfo = document.createElement('aside')
-    stationInfo.setAttribute('class', 'cardDiv')
     stationInfo.innerHTML = `
     <p>🚘 ${arr[i].distance.toFixed(2)} mi.</p>
     <p>${arr[i].street_address}</p> 
@@ -139,7 +136,7 @@ function dataDisplay5(arr, length) {
 
     //create button
     const cardBtn = document.createElement('a')
-    cardBtn.classList.add('cardBtns')
+  
     cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
@@ -164,10 +161,8 @@ function displaySearches() {
   savedLocations.innerHTML = ''
   for (let i = 0; i < searches.length; i++) {
     let buttonDiv = document.createElement('div')
-    buttonDiv.setAttribute('class', 'buttonDiv')
     const searchItem = document.createElement('button')
     searchItem.textContent = searches[i][0]
-    searchItem.setAttribute('class', 'searchItem')
     buttonDiv.appendChild(searchItem)
     searchItem.addEventListener('click', () => {
       getApiByID(searches[i][1])
@@ -177,7 +172,6 @@ function displaySearches() {
     //create delete button
     const deleteBtn = document.createElement('button')
     deleteBtn.textContent = 'X'
-    deleteBtn.setAttribute('class', 'deleteBtn')
     deleteBtn.id = i
     buttonDiv.appendChild(deleteBtn)
     deleteBtn.addEventListener('click', (event) => {
