@@ -4,7 +4,6 @@ const searchInput = document.getElementById('searchInput')
 const bgLocationCard = document.getElementById('bgLocationCard')
 const tileCards = document.getElementById('tileCards')
 const savedLocations = document.getElementById('savedLocations')
-const searchSection = document.getElementById('searchSection')
 const mapDiv = document.getElementById('mapDiv')
 let map;
 
@@ -122,7 +121,7 @@ function dataDisplay5(arr, length) {
 
   for (let i = 1; i < length; i++) {
     arr[i].ev_pricing == null ? price = 'free' : price = arr[i].ev_pricing
-    // create text
+    // create cardTile text
     const stationInfo = document.createElement('aside')
     stationInfo.innerHTML = `
     <p>🚘 ${arr[i].distance.toFixed(2)} mi.</p>
@@ -160,8 +159,10 @@ function displaySearches() {
   //create location button
   savedLocations.innerHTML = ''
   for (let i = 0; i < searches.length; i++) {
-    let buttonDiv = document.createElement('div')
+    const buttonDiv = document.createElement('div')
+    buttonDiv.classList.add('mb-1')
     const searchItem = document.createElement('button')
+    searchItem.classList.add('button', 'is-link')
     searchItem.textContent = searches[i][0]
     buttonDiv.appendChild(searchItem)
     searchItem.addEventListener('click', () => {
@@ -171,6 +172,7 @@ function displaySearches() {
 
     //create delete button
     const deleteBtn = document.createElement('button')
+    deleteBtn.classList.add("button", "is-danger")
     deleteBtn.textContent = 'X'
     deleteBtn.id = i
     buttonDiv.appendChild(deleteBtn)

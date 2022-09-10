@@ -1,1 +1,17 @@
+* {
+ 
+}
 
+#locator {
+  font-size: 30px;
+}
+
+.is-danger {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+} 
+
+.is-link {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+} 
