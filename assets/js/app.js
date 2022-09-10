@@ -76,7 +76,7 @@ function getApiByZip(location) {
 }
 
 // Load default map of Berkeley, California
-map = L.map('mapDiv').setView([37.871, -122.259], 12);
+map = L.map('mapDiv').setView([37.871, -122.259], 16);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
@@ -84,11 +84,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Create display for map of EV stations in the given (search parameter) region
-function latLon(lat, lon) {
+function latLon(lat, lon, arr) {
   //replace current map with new search
   if (map != undefined) { map.remove(); }
 
-  map = L.map('mapDiv').setView([lat, lon], 15);
+  map = L.map('mapDiv').setView([lat, lon], 17);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
@@ -103,12 +103,13 @@ function dataDisplay1(arr, price) {
   const BLC = document.createElement('div')
   arr.ev_pricing == null ? price = 'free' : price = arr.ev_pricing
   BLC.innerHTML = `
-      <h4>${arr.station_name}</h4>
-      <p><strong>Address: </strong> ${arr.street_address}</p> 
-      <p>${arr.city}, ${arr.state}, ${arr.zip}</p> 
-      <p><strong>Phone: </strong> ${arr.station_phone}</p> 
-      <p>🔌 ${arr.ev_connector_types}</p> 
-      <p><strong>Price: </strong> ${price}</p> 
+      <h4 class="is-size-4 has-text-centered block">${arr.station_name}</h4>
+      <hr>
+      <p class="is-size-4"><strong>Address: </strong> ${arr.street_address}</p> 
+      <p class="is-size-4">${arr.city}, ${arr.state}, ${arr.zip}</p> 
+      <p class="is-size-4"><strong>Phone: </strong> ${arr.station_phone}</p> 
+      <p class="is-size-4">🔌 ${arr.ev_connector_types}</p> 
+      <p class="is-size-4"><strong>Price: </strong> ${price}</p> 
       `
   bgLocationCard.appendChild(BLC)
   saveStation([arr.station_name, arr.id, arr.zip])
@@ -125,18 +126,19 @@ function dataDisplay5(arr, length) {
     const stationInfo = document.createElement('div')
     stationInfo.classList.add('box')
     stationInfo.innerHTML = `
-    <p>🚘 ${arr[i].distance.toFixed(2)} mi.</p>
-    <p>${arr[i].street_address}</p> 
-    <p>${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
-    <p>${arr[i].station_phone}</p> 
-    <p>🔌 ${arr[i].ev_connector_types}</p> 
-    <p>${price}</p> 
+    <hr>
+    <p class="is-size-5">🚘 ${arr[i].distance.toFixed(2)} mi.</p>
+    <p class="is-size-5"><strong>Address: </strong>${arr[i].street_address}</p> 
+    <p class="is-size-5">${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
+    <p class="is-size-5"><strong>Phone: </strong>${arr[i].station_phone}</p> 
+    <p class="is-size-5">🔌 ${arr[i].ev_connector_types}</p> 
+    <p class="is-size-5"><strong>Price: </strong>${price}</p> 
     `
     cardDiv.appendChild(stationInfo)
 
     //create button
-    const cardBtn = document.createElement('a')
-  
+    const cardBtn = document.createElement('div')
+    cardBtn.classList.add("is-size-5","has-text-centered", "block")
     cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
