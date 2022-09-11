@@ -35,7 +35,15 @@ function getApi(location) {
       // display nearby locations
       dataDisplay5(data.fuel_stations, 10)
       // display station on map
-      latLon(data.latitude, data.longitude)
+      let planes = [
+        [data.fuel_stations[0].latitude, data.fuel_stations[0].longitude],
+        [data.fuel_stations[1].latitude, data.fuel_stations[1].longitude],
+        [data.fuel_stations[2].latitude, data.fuel_stations[2].longitude],
+        [data.fuel_stations[3].latitude, data.fuel_stations[3].longitude],
+        [data.fuel_stations[4].latitude, data.fuel_stations[4].longitude]
+      ]
+
+      latLon(data.latitude, data.longitude, planes)
     });
 }
 
@@ -53,7 +61,8 @@ function getApiByID(location) {
       // display station info for map view
       dataDisplay1(data.alt_fuel_station)
       // display station on map
-      latLon(data.alt_fuel_station.latitude, data.alt_fuel_station.longitude)
+      let planes = [[data.alt_fuel_station.latitude, data.alt_fuel_station.longitude]]
+      latLon(data.alt_fuel_station.latitude, data.alt_fuel_station.longitude, planes)
     });
 }
 
@@ -71,7 +80,15 @@ function getApiByZip(location) {
       // display nearby locations
       dataDisplay5(data.fuel_stations, 10)
       // display station on map
-      latLon(data.fuel_stations[1].latitude, data.fuel_stations[1].longitude)
+      let planes = [
+        [data.fuel_stations[0].latitude, data.fuel_stations[0].longitude],
+        [data.fuel_stations[1].latitude, data.fuel_stations[1].longitude],
+        [data.fuel_stations[2].latitude, data.fuel_stations[2].longitude],
+        [data.fuel_stations[3].latitude, data.fuel_stations[3].longitude],
+        [data.fuel_stations[4].latitude, data.fuel_stations[4].longitude]
+      ]
+
+      latLon(data.fuel_stations[1].latitude, data.fuel_stations[1].longitude, planes)
     });
 }
 
@@ -94,7 +111,22 @@ function latLon(lat, lon, arr) {
     attribution: '© OpenStreetMap'
   }).addTo(map);
 
-  var marker = L.marker([lat, lon]).addTo(map)
+  // var marker = L.marker([lat, lon]).addTo(map)
+  let marker
+
+  var myIcon = L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+    });
+
+  for (var i = 1; i < arr.length; i++) {
+    marker = new L.marker([arr[i][0], arr[i][1]]).addTo(map)
+    L.marker([lat, lon], {icon: myIcon}).addTo(map);
+  }
 }
 
 // Create display for station-info on map_Section
@@ -138,7 +170,7 @@ function dataDisplay5(arr, length) {
 
     //create button
     const cardBtn = document.createElement('div')
-    cardBtn.classList.add("is-size-5","has-text-centered", "block")
+    cardBtn.classList.add("is-size-5", "has-text-centered", "block")
     cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
