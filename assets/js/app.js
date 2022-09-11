@@ -15,7 +15,7 @@ searchBtn.addEventListener('click', (e) => {
   searchInput.value = ''
 })
 
-// Retrieve and display station location and retailer information from search bar
+//1. Retrieve and display station location and retailer information from search bar
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/nearest/
 function getApi(location) {
   const requestUrl = `https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?location=${location}&fuel_type_code='ELEC'&radius=5.0&api_key=${apikey}`
@@ -47,7 +47,7 @@ function getApi(location) {
     });
 }
 
-// Retrieve and display station location and retailer information with card buttons
+//2. Retrieve and display station location and retailer information with card buttons
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/get/
 function getApiByID(location) {
   const requestUrl = ` https://developer.nrel.gov/api/alt-fuel-stations/v1/${location}.json?api_key=${apikey}`
@@ -80,14 +80,13 @@ function getApiByZip(location) {
       // display nearby locations
       dataDisplay5(data.fuel_stations, 10)
       // display station on map
-      let planes = [
+      let planes = [ 
         [data.fuel_stations[0].latitude, data.fuel_stations[0].longitude],
         [data.fuel_stations[1].latitude, data.fuel_stations[1].longitude],
         [data.fuel_stations[2].latitude, data.fuel_stations[2].longitude],
         [data.fuel_stations[3].latitude, data.fuel_stations[3].longitude],
         [data.fuel_stations[4].latitude, data.fuel_stations[4].longitude]
       ]
-
       latLon(data.fuel_stations[1].latitude, data.fuel_stations[1].longitude, planes)
     });
 }
@@ -100,7 +99,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap'
 }).addTo(map);
 
-// Create display for map of EV stations in the given (search parameter) region
+// Create display for map of EV stations in the search region
 function latLon(lat, lon, arr) {
   //replace current map with new search
   if (map != undefined) { map.remove(); }
@@ -121,11 +120,14 @@ function latLon(lat, lon, arr) {
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
-    });
+  });
 
+  //custom marker for map selection
+  L.marker([lat, lon], { icon: myIcon }).addTo(map);
+
+  //close by markers
   for (var i = 1; i < arr.length; i++) {
     marker = new L.marker([arr[i][0], arr[i][1]]).addTo(map)
-    L.marker([lat, lon], {icon: myIcon}).addTo(map);
   }
 }
 
@@ -170,7 +172,7 @@ function dataDisplay5(arr, length) {
 
     //create button
     const cardBtn = document.createElement('div')
-    cardBtn.classList.add("is-size-5", "has-text-centered", "block")
+    cardBtn.classList.add("is-size-5", "has-text-left", "block")
     cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)

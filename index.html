@@ -15,7 +15,6 @@
       integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
       crossorigin=""></script>
 
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="./assets/images/images.png">
     <title>Power Locator</title>
   </head>
@@ -24,11 +23,14 @@
     <section class="section columns">
 
       <div class="column is-two-fifths">
+
         <nav class="container block">
-          <a id="locator" style="  font-size: 30px;" class="navbar-item" href="https://bulma.io">
+          <a id="locator" style=" font-size: 30px;" class="navbar-item"
+            href="https://bulma.io">
             <img class="mr-2" src="./assets/images/images.png">
             STATION LOCATOR
           </a>
+
           <div class="field is-grouped">
             <p class="control is-expanded">
               <input
@@ -43,14 +45,18 @@
               </button>
             </p>
           </div>
+
         </nav>
 
         <div style="height: 90vh; overflow: scroll;">
+
           <div class="box " id="bgLocationCard">
-            <p class="has-text-weight-semibold ">Map Selection</p>
-            <p>View a search using the search bar</p>
-            <p>View a saved search</p>
-            <p>View close by searches</p>
+            <div class="is-size-4 has-text-centered block">
+              <p class="has-text-weight-semibold ">Map Selection</p>
+              <p>View a search using the search bar</p>
+              <p>View a saved search</p>
+              <p>View nearby searches</p>
+            </div>
           </div>
 
           <div id="savedLocations"></div>
@@ -60,7 +66,7 @@
             <div id='tileCards'></div>
           </div>
         </div>
-
+        
       </div>
 
       <div class="container box column is-three-fifths" id="mapDiv"
@@ -72,8 +78,3 @@
   </body>
 
 </html>
-<!-- 
-make saved search look like bulma panels
-  juice up map
-
- -->
