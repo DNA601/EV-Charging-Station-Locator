@@ -161,6 +161,7 @@ function dataDisplay5(arr, length) {
     stationInfo.classList.add('box')
     stationInfo.innerHTML = `
     <hr>
+    
     <p class="is-size-5">🚘 ${arr[i].distance.toFixed(2)} mi.</p>
     <p class="is-size-5"><strong>Address: </strong>${arr[i].street_address}</p> 
     <p class="is-size-5">${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 

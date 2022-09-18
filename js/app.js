@@ -42,7 +42,6 @@ function getApi(location) {
         [data.fuel_stations[3].latitude, data.fuel_stations[3].longitude],
         [data.fuel_stations[4].latitude, data.fuel_stations[4].longitude]
       ]
-
       latLon(data.latitude, data.longitude, planes)
     });
 }
@@ -171,8 +170,10 @@ function dataDisplay5(arr, length) {
     const stationInfo = document.createElement('div')
     stationInfo.classList.add('box')
     stationInfo.innerHTML = `
+    <p class="is-size-4 has-text-centered"><i class="fa-solid fa-car"></i> ${arr[i].distance.toFixed(2)} mi.</p>
     <hr>
-    <p class="is-size-5">${arr[i].street_address} ${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
+    <p class="is-size-5 has-text-centered">${arr[i].street_address} ${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
+    </br>
     <p class="is-size-5"><i class="fa-solid fa-phone"></i> ${arr[i].station_phone}</p> 
     <p class="is-size-5"><i class="fa-solid fa-plug"></i> ${arr[i].ev_connector_types}</p> 
     <p class="is-size-5"><i class="fa-solid fa-money-check-dollar"></i> ${price}</p> 
@@ -182,8 +183,9 @@ function dataDisplay5(arr, length) {
     //create button
     const cardBtn = document.createElement('div')
     cardBtn.classList.add("is-size-4", "block", "has-text-centered")
-    // cardBtn.innerHTML = `${arr[i].station_name} - <i class="fa-solid fa-car"></i> ${arr[i].distance.toFixed(2)}mi.`
-    cardBtn.textContent = arr[i].station_name
+    cardBtn.textContent = arr[i].station_name 
+    // - <i class="fa-solid fa-car"></i> <span>${arr[i].distance.toFixed(2)} mi.</span> 
+    // cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
     stationInfo.prepend(cardBtn)
@@ -202,14 +204,14 @@ function displaySearches() {
   if (!localStorage.station) { return }
   let searches = JSON.parse(localStorage.getItem('station'))
 
-  // function truncateString(str) {
-  //   // Clear out that junk in your trunk
-  //   if (str.length > 45) {
-  //     return str.slice(0, 45) + "...";
-  //   } else {
-  //     return str;
-  //   }
-  // }
+  function truncateString(str) {
+    // Clear out that junk in your trunk
+    if (str.length > 35) {
+      return str.slice(0, 35) + "...";
+    } else {
+      return str;
+    }
+  }
 
   //create location button
   savedLocations.innerHTML = ''
@@ -218,8 +220,8 @@ function displaySearches() {
     buttonDiv.classList.add('mb-1', 'is-fullwidth')
     const searchItem = document.createElement('button')
     searchItem.classList.add('button', 'is-link', "is-fullwidth", "is-size-4")
-    searchItem.textContent = searches[i][0]
-    // searchItem.textContent = truncateString(searches[i][0])
+    // searchItem.textContent = searches[i][0]
+    searchItem.textContent = truncateString(searches[i][0])
     buttonDiv.appendChild(searchItem)
     searchItem.addEventListener('click', () => {
       getApiByID(searches[i][1])
@@ -263,3 +265,25 @@ function saveStation(content) {
     displaySearches()
   }
 }
+
+
+// stationInfo.innerHTML = `
+// <p class="is-size-4 has-text-centered"><i class="fa-solid fa-car"></i> ${arr[i].distance.toFixed(2)} mi.</p>
+// <hr>
+// <p class="is-size-5 has-text-centered">${arr[i].street_address} ${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
+// </br>
+// <div class="is-flex is-justify-content-space-between iconDiv has-text-warning has-background-dark">
+// <div class="is-flex is-flex-direction-column is-align-items-center">
+// <i class="fa-solid fa-phone"></i> 
+// <p class="is-size-5">${arr[i].station_phone}</p>
+// </div>
+// <div class="is-flex is-flex-direction-column is-align-items-center">
+// <i class="fa-solid fa-plug">
+// <p class="is-size-5"></i> ${arr[i].ev_connector_types}</p>
+// </div>
+// <div class="is-flex is-flex-direction-column is-align-items-center">
+// <i class="fa-solid fa-money-check-dollar">
+// <p class="is-size-5"></i> ${price}</p>
+// </div>
+// </div>
+// `
