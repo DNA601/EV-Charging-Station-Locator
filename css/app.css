@@ -5,17 +5,18 @@
 .sideCol {
   background-color:hsl(141, 71%, 48%);
 }
+
 .price {
   max-width: 140px;
   overflow: hidden;
   text-overflow: clip;
   white-space: nowrap;
 }
-.iconDiv {
-  border: 1px solid gray;
-  padding: 1em;
 
+.iconDiv {
+  padding: 1em;
 }
+
 button {
   border: none !important;
 }

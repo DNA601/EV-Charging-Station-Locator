@@ -1,10 +1,10 @@
-const apikey = '2RWEmIH2pRUJZcqZ1v5HIAPtokWgcKHxrzrK8GK2'
-let stationArr = JSON.parse(localStorage.getItem('station')) || []
-const searchInput = document.getElementById('searchInput')
-const bgLocationCard = document.getElementById('bgLocationCard')
-const tileCards = document.getElementById('tileCards')
-const savedLocations = document.getElementById('savedLocations')
-const mapDiv = document.getElementById('mapDiv')
+const apikey = '2RWEmIH2pRUJZcqZ1v5HIAPtokWgcKHxrzrK8GK2';
+let stationArr = JSON.parse(localStorage.getItem('station')) || [];
+const searchInput = document.getElementById('searchInput');
+const bgLocationCard = document.getElementById('bgLocationCard');
+const tileCards = document.getElementById('tileCards');
+const savedLocations = document.getElementById('savedLocations');
+const mapDiv = document.getElementById('mapDiv');
 let map;
 
 const searchBtn = document.getElementById('searchBtn')
@@ -13,7 +13,7 @@ searchBtn.addEventListener('click', (e) => {
   e.preventDefault()
   getApi(searchInput.value)
   searchInput.value = ''
-})
+});
 
 //1. Retrieve and display station location and retailer information from search bar
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/nearest/
@@ -44,7 +44,7 @@ function getApi(location) {
       ]
       latLon(data.latitude, data.longitude, planes)
     });
-}
+};
 
 //2. Retrieve and display station location and retailer information with card buttons
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/get/
@@ -63,7 +63,7 @@ function getApiByID(location) {
       let planes = [[data.alt_fuel_station.latitude, data.alt_fuel_station.longitude]]
       latLon(data.alt_fuel_station.latitude, data.alt_fuel_station.longitude, planes)
     });
-}
+};
 
 //3. Retrieve and display station location and retailer information with saved search buttons
 // https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/nearest/
@@ -88,7 +88,7 @@ function getApiByZip(location) {
       ]
       latLon(data.fuel_stations[1].latitude, data.fuel_stations[1].longitude, planes)
     });
-}
+};
 
 // Load default map of Berkeley, California
 map = L.map('mapDiv').setView([37.871, -122.259], 16);
@@ -110,7 +110,7 @@ function latLon(lat, lon, arr) {
   }).addTo(map);
 
   // var marker = L.marker([lat, lon]).addTo(map)
-  let marker
+  let marker;
 
   var myIcon = L.icon({
     iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
@@ -128,7 +128,7 @@ function latLon(lat, lon, arr) {
   for (var i = 1; i < arr.length; i++) {
     marker = new L.marker([arr[i][0], arr[i][1]]).addTo(map)
   }
-}
+};
 
 // Create display for station-info on map_Section
 function dataDisplay1(arr, price) {
@@ -155,8 +155,8 @@ function dataDisplay1(arr, price) {
       </div>
       </div>
       `
-  bgLocationCard.appendChild(BLC)
-  saveStation([arr.station_name, arr.id, arr.zip])
+  bgLocationCard.appendChild(BLC);
+  saveStation([arr.station_name, arr.id, arr.zip]);
 }
 
 // Create display for station-info in nearby_Locations_section
@@ -184,8 +184,6 @@ function dataDisplay5(arr, length) {
     const cardBtn = document.createElement('div')
     cardBtn.classList.add("is-size-4", "block", "has-text-centered")
     cardBtn.textContent = arr[i].station_name 
-    // - <i class="fa-solid fa-car"></i> <span>${arr[i].distance.toFixed(2)} mi.</span> 
-    // cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
     stationInfo.prepend(cardBtn)
@@ -197,7 +195,7 @@ function dataDisplay5(arr, length) {
     })
   }
   tileCards.appendChild(cardDiv)
-}
+};
 
 //Create display for saved searches as buttons
 function displaySearches() {
