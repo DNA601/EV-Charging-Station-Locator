@@ -137,24 +137,13 @@ function dataDisplay1(arr, price) {
   const BLC = document.createElement('div')
   arr.ev_pricing == null ? price = 'free' : price = arr.ev_pricing
   BLC.innerHTML = `
-      <h4 class="is-size-3 has-text-centered block">${arr.station_name}</h4>
+      <h4 class="is-size-4 has-text-centered block">${arr.station_name}</h4>
       <hr>
-      <p class="is-size-4 has-text-centered"> ${arr.street_address} ${arr.city}, ${arr.state}, ${arr.zip}</p> 
-      </br>
-      <div class="is-flex is-justify-content-space-between iconDiv has-text-warning has-background-dark">
-      <div class="is-flex is-flex-direction-column is-align-items-center">
-      <i class="fa-solid fa-phone"></i> 
-      <p class="is-size-5">${arr.station_phone}</p> 
-      </div>
-      <div  class="is-flex is-flex-direction-column is-align-items-center">
-      <i class="fa-solid fa-plug"></i> 
-      <p class="is-size-5">${arr.ev_connector_types}</p> 
-      </div>
-      <div class="is-flex is-flex-direction-column is-align-items-center">
-      <i class="fa-solid fa-money-check-dollar"></i>
-      <p class="is-size-5 price"> ${price}</p> 
-      </div>
-      </div>
+      <p class="is-size-4"><strong>Address: </strong> ${arr.street_address}</p> 
+      <p class="is-size-4">${arr.city}, ${arr.state}, ${arr.zip}</p> 
+      <p class="is-size-4"><strong>Phone: </strong> ${arr.station_phone}</p> 
+      <p class="is-size-4">🔌 ${arr.ev_connector_types}</p> 
+      <p class="is-size-4"><strong>Price: </strong> ${price}</p> 
       `
   bgLocationCard.appendChild(BLC)
   saveStation([arr.station_name, arr.id, arr.zip])
@@ -172,17 +161,18 @@ function dataDisplay5(arr, length) {
     stationInfo.classList.add('box')
     stationInfo.innerHTML = `
     <hr>
-    <p class="is-size-5">${arr[i].street_address} ${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
-    <p class="is-size-5"><i class="fa-solid fa-phone"></i> ${arr[i].station_phone}</p> 
-    <p class="is-size-5"><i class="fa-solid fa-plug"></i> ${arr[i].ev_connector_types}</p> 
-    <p class="is-size-5"><i class="fa-solid fa-money-check-dollar"></i> ${price}</p> 
+    <p class="is-size-5">🚘 ${arr[i].distance.toFixed(2)} mi.</p>
+    <p class="is-size-5"><strong>Address: </strong>${arr[i].street_address}</p> 
+    <p class="is-size-5">${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
+    <p class="is-size-5"><strong>Phone: </strong>${arr[i].station_phone}</p> 
+    <p class="is-size-5">🔌 ${arr[i].ev_connector_types}</p> 
+    <p class="is-size-5"><strong>Price: </strong>${price}</p> 
     `
     cardDiv.appendChild(stationInfo)
 
     //create button
     const cardBtn = document.createElement('div')
-    cardBtn.classList.add("is-size-4", "block", "has-text-centered")
-    // cardBtn.innerHTML = `${arr[i].station_name} - <i class="fa-solid fa-car"></i> ${arr[i].distance.toFixed(2)}mi.`
+    cardBtn.classList.add("is-size-5", "has-text-left", "block")
     cardBtn.textContent = arr[i].station_name
     cardBtn.setAttribute('value', `${arr[i].id}`)
     cardBtn.setAttribute('datazip', `${arr[i].zip}`)
@@ -202,24 +192,14 @@ function displaySearches() {
   if (!localStorage.station) { return }
   let searches = JSON.parse(localStorage.getItem('station'))
 
-  // function truncateString(str) {
-  //   // Clear out that junk in your trunk
-  //   if (str.length > 45) {
-  //     return str.slice(0, 45) + "...";
-  //   } else {
-  //     return str;
-  //   }
-  // }
-
   //create location button
   savedLocations.innerHTML = ''
   for (let i = 0; i < searches.length; i++) {
     const buttonDiv = document.createElement('div')
-    buttonDiv.classList.add('mb-1', 'is-fullwidth')
+    buttonDiv.classList.add('mb-1', 'box', 'is-fullwidth')
     const searchItem = document.createElement('button')
-    searchItem.classList.add('button', 'is-link', "is-fullwidth", "is-size-4")
+    searchItem.classList.add('button', 'is-link', "mr-1")
     searchItem.textContent = searches[i][0]
-    // searchItem.textContent = truncateString(searches[i][0])
     buttonDiv.appendChild(searchItem)
     searchItem.addEventListener('click', () => {
       getApiByID(searches[i][1])
@@ -228,9 +208,8 @@ function displaySearches() {
 
     //create delete button
     const deleteBtn = document.createElement('button')
-    deleteBtn.classList.add("button", "is-fullwidth", "has-background-danger", "has-text-white")
+    deleteBtn.classList.add("delete", "is-large")
     deleteBtn.id = i
-    deleteBtn.textContent="Delete"
     buttonDiv.appendChild(deleteBtn)
     deleteBtn.addEventListener('click', (event) => {
       let btnId = event.target.id
@@ -239,7 +218,7 @@ function displaySearches() {
     savedLocations.appendChild(buttonDiv)
   }
   const savedHeader = document.createElement('h2')
-  savedHeader.classList.add('subtitle', "is-size-2")
+  savedHeader.classList.add('subtitle', 'box')
   savedHeader.textContent = 'SAVED SEARCHES'
   savedLocations.prepend(savedHeader)
 } displaySearches();

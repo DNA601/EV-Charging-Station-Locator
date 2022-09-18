@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=gitdevice-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/aa3911e24a.js"
+      crossorigin="anonymous"></script>
     <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet"
@@ -16,57 +18,57 @@
       crossorigin=""></script>
 
     <link rel="icon" type="image/x-icon" href="./assets/images/images.png">
+    <link rel="stylesheet" href="./css/app.css">
     <title>Power Locator</title>
+
   </head>
 
   <body>
     <section class="section columns">
 
-      <div class="column is-two-fifths">
-
+      <div class="column is-two-fifths sideCol">
         <nav class="container block">
-          <a id="locator" style=" font-size: 30px;" class="navbar-item"
-            href="https://bulma.io">
-            <img class="mr-2" src="./assets/images/images.png">
-            STATION LOCATOR
-          </a>
-
+          <h1 id="locator" style=" font-size: 30px;" class="navbar-item
+            is-size-1">
+            <i class="fa-solid fa-charging-station"></i> STATION LOCATOR
+          </h1>
           <div class="field is-grouped">
             <p class="control is-expanded">
               <input
-                class="input "
+                class="input is-size-4"
                 type="text"
-                placeholder="Search city or zipcode"
+                placeholder="city or zipcode"
                 id="searchInput">
             </p>
             <p class="control">
-              <button class="button is-info" id="searchBtn">
-                Search
+              <button class="button is-info is-size-4" id="searchBtn">
+                <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </p>
           </div>
-
         </nav>
 
         <div style="height: 90vh; overflow: scroll;">
-
           <div class="box " id="bgLocationCard">
             <div class="is-size-4 has-text-centered block">
-              <p class="has-text-weight-semibold ">Map Selection</p>
               <p>View a search using the search bar</p>
               <p>View a saved search</p>
               <p>View nearby searches</p>
             </div>
           </div>
 
-          <div id="savedLocations"></div>
-
+          <div id="savedLocations" class="box"></div>
           <div class="container">
-            <h2 class="subtitle box mt-5">NEARBY LOCATIONS</h2>
-            <div id='tileCards'></div>
+            <div class="box">
+              <h2 class="is-size-2">NEARBY</h2>
+              <h3 class="is-size-4"> <i class="fa-solid fa-car"></i> DISTANCE
+                FROM SELECTED LOCATION </h3>
+            </div>
+            <div id='tileCards'>
+            </div>
           </div>
+          
         </div>
-        
       </div>
 
       <div class="container box column is-three-fifths" id="mapDiv"
