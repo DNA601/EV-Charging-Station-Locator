@@ -2,12 +2,15 @@
   border-radius: 0 !important;
 }
 
-.sideCol {
-  background-color:hsl(141, 71%, 48%);
+html {
+  background-color: hsl(0, 0%, 96%);
 }
 
+.fontColor {
+  color: #4a4a4a'
+}
 .price {
-  max-width: 140px;
+  max-width: 120px;
   overflow: hidden;
   text-overflow: clip;
   white-space: nowrap;
@@ -19,4 +22,8 @@
 
 button {
   border: none !important;
+}
+
+.stationInfo {
+  width: 20rem;
 }

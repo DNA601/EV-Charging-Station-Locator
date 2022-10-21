@@ -136,11 +136,10 @@ function dataDisplay1(arr, price) {
   const BLC = document.createElement('div')
   arr.ev_pricing == null ? price = 'free' : price = arr.ev_pricing
   BLC.innerHTML = `
-      <h4 class="is-size-3 has-text-centered block">${arr.station_name}</h4>
-      <hr>
-      <p class="is-size-4 has-text-centered"> ${arr.street_address} ${arr.city}, ${arr.state}, ${arr.zip}</p> 
+      <h4 class="is-size-3 has-text-centered fontColor has-background-success">${arr.station_name}</h4>
+      <p class="is-size-4 has-text-centered fontColor  has-background-success"> ${arr.street_address} ${arr.city}, ${arr.state}, ${arr.zip}</p> 
       </br>
-      <div class="is-flex is-justify-content-space-between iconDiv has-text-warning has-background-dark">
+      <div class="is-flex is-justify-content-space-around iconDiv fontColor  has-background-success">
       <div class="is-flex is-flex-direction-column is-align-items-center">
       <i class="fa-solid fa-phone"></i> 
       <p class="is-size-5">${arr.station_phone}</p> 
@@ -156,6 +155,7 @@ function dataDisplay1(arr, price) {
       </div>
       `
   bgLocationCard.appendChild(BLC);
+  BLC.classList.add('has-background-success', 'box', "mb-3")
   saveStation([arr.station_name, arr.id, arr.zip]);
 }
 
@@ -179,7 +179,7 @@ function dataDisplay5(arr, length) {
     <p class="is-size-5"><i class="fa-solid fa-money-check-dollar"></i> ${price}</p> 
     `
     cardDiv.appendChild(stationInfo)
-
+    stationInfo.classList.add('stationInfo')
     //create button
     const cardBtn = document.createElement('div')
     cardBtn.classList.add("is-size-4", "block", "has-text-centered")
@@ -205,7 +205,7 @@ function displaySearches() {
   function truncateString(str) {
     // Clear out that junk in your trunk
     if (str.length > 35) {
-      return str.slice(0, 35) + "...";
+      return str.slice(0, 25) + "...";
     } else {
       return str;
     }
@@ -215,9 +215,9 @@ function displaySearches() {
   savedLocations.innerHTML = ''
   for (let i = 0; i < searches.length; i++) {
     const buttonDiv = document.createElement('div')
-    buttonDiv.classList.add('mb-1', 'is-fullwidth')
+    buttonDiv.classList.add('mb-3')
     const searchItem = document.createElement('button')
-    searchItem.classList.add('button', 'is-link', "is-fullwidth", "is-size-4")
+    searchItem.classList.add('button', 'is-link', 'is-small', 'is-fullwidth')
     // searchItem.textContent = searches[i][0]
     searchItem.textContent = truncateString(searches[i][0])
     buttonDiv.appendChild(searchItem)
@@ -228,7 +228,7 @@ function displaySearches() {
 
     //create delete button
     const deleteBtn = document.createElement('button')
-    deleteBtn.classList.add("button", "is-fullwidth", "has-background-danger", "has-text-white")
+    deleteBtn.classList.add("button", "is-fullwidth", "has-background-danger", "has-text-white", 'is-link', 'is-small')
     deleteBtn.id = i
     deleteBtn.textContent="Delete"
     buttonDiv.appendChild(deleteBtn)
@@ -239,7 +239,7 @@ function displaySearches() {
     savedLocations.appendChild(buttonDiv)
   }
   const savedHeader = document.createElement('h2')
-  savedHeader.classList.add('subtitle', "is-size-2")
+  savedHeader.classList.add('subtitle', "is-size-4", "has-text-centered")
   savedHeader.textContent = 'SAVED SEARCHES'
   savedLocations.prepend(savedHeader)
 } displaySearches();
@@ -263,25 +263,3 @@ function saveStation(content) {
     displaySearches()
   }
 }
-
-
-// stationInfo.innerHTML = `
-// <p class="is-size-4 has-text-centered"><i class="fa-solid fa-car"></i> ${arr[i].distance.toFixed(2)} mi.</p>
-// <hr>
-// <p class="is-size-5 has-text-centered">${arr[i].street_address} ${arr[i].city}, ${arr[i].state}, ${arr[i].zip}</p> 
-// </br>
-// <div class="is-flex is-justify-content-space-between iconDiv has-text-warning has-background-dark">
-// <div class="is-flex is-flex-direction-column is-align-items-center">
-// <i class="fa-solid fa-phone"></i> 
-// <p class="is-size-5">${arr[i].station_phone}</p>
-// </div>
-// <div class="is-flex is-flex-direction-column is-align-items-center">
-// <i class="fa-solid fa-plug">
-// <p class="is-size-5"></i> ${arr[i].ev_connector_types}</p>
-// </div>
-// <div class="is-flex is-flex-direction-column is-align-items-center">
-// <i class="fa-solid fa-money-check-dollar">
-// <p class="is-size-5"></i> ${price}</p>
-// </div>
-// </div>
-// `

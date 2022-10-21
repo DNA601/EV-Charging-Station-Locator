@@ -24,56 +24,58 @@
   </head>
 
   <body>
-    <section class="section columns">
 
-      <div class="column is-two-fifths sideCol">
-        <nav class="container block">
-          <h1 id="locator" style=" font-size: 30px;" class="navbar-item
-            is-size-1">
-            <i class="fa-solid fa-charging-station"></i> STATION LOCATOR
-          </h1>
-          <!-- <i class="fa-solid fa-square-full"  -->
-          <div class="field is-grouped">
-            <p class="control is-expanded">
-              <input
-                class="input is-size-4"
-                type="text"
-                placeholder="city or zipcode"
-                id="searchInput">
-            </p>
-            <p class="control">
-              <button class="button is-info is-size-4" id="searchBtn">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </p>
-          </div>
-        </nav>
+    <nav class=" has-background-success py-3 box ">
+      <div class="container ">
+        <h1 id="locator" class="navbar-item is-flex is-justify-content-center
+          is-size-2 mb-3">
+          <i class="fa-solid fa-charging-station"> STATION LOCATOR</i>
+        </h1>
+        <div class="field is-grouped ">
+          <input
+            class="input is-size-5"
+            type="text"
+            placeholder="city or zipcode"
+            id="searchInput">
+          <button class="button is-info is-size-5" id="searchBtn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
 
-        <div style="height: 90vh; overflow: scroll;">
-          <div class="box " id="bgLocationCard">
-            <div class="is-size-4 has-text-centered block">
+    <section class="section">
+
+      <div class="columns">
+        <div id="savedLocations" class="column is-one-quarter box mt-3"></div>
+
+        <div class="column is-three-quarters">
+
+          <div id="bgLocationCard">
+            <div class="is-size-4 has-text-centered box mb-3">
               <p>View a search using the search bar</p>
               <p>View a saved search</p>
               <p>View nearby searches</p>
             </div>
           </div>
-
-          <div id="savedLocations" class="box"></div>
-          <div class="container">
-            <div class="box">
-              <h2 class="is-size-2">NEARBY</h2>
-              <h3 class="is-size-4"> <i class="fa-solid fa-car"></i> DISTANCE
-                FROM SELECTED LOCATION </h3>
-            </div>
-            <div id='tileCards'>
-            </div>
+          <div class="" id="mapDiv"
+            style="height: 50vh;">
           </div>
-          
+
         </div>
       </div>
 
-      <div class="container box column is-three-fifths" id="mapDiv"
-        style="height: 100vh;"></div>
+      <div>
+        <div class="box has-text-centered">
+          <h2 class="is-size-4 ">NEARBY</h2>
+          <h3 class="is-size-5"> <i class="fa-solid fa-car"></i> Distance From Selected Location </h3>
+        </div>
+        <div id='tileCards'>
+        </div>
+      </div>
+
+
+
 
     </section>
 
