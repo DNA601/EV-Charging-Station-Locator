@@ -139,7 +139,7 @@ function dataDisplay1(arr, price) {
       <h4 class="is-size-3 has-text-centered fontColor has-background-success">${arr.station_name}</h4>
       <p class="is-size-4 has-text-centered fontColor  has-background-success"> ${arr.street_address} ${arr.city}, ${arr.state}, ${arr.zip}</p> 
       </br>
-      <div class="is-flex is-justify-content-space-around iconDiv fontColor  has-background-success">
+      <div class="is-flex is-justify-content-space-around iconDiv fontColor has-background-success ">
       <div class="is-flex is-flex-direction-column is-align-items-center">
       <i class="fa-solid fa-phone"></i> 
       <p class="is-size-5">${arr.station_phone}</p> 
@@ -179,6 +179,7 @@ function dataDisplay5(arr, length) {
     <p class="is-size-5"><i class="fa-solid fa-money-check-dollar"></i> ${price}</p> 
     `
     cardDiv.appendChild(stationInfo)
+    cardDiv.classList.add('is-flex', 'is-flex-wrap-wrap', 'is-justify-content-space-evenly')
     stationInfo.classList.add('stationInfo')
     //create button
     const cardBtn = document.createElement('div')
@@ -217,7 +218,7 @@ function displaySearches() {
     const buttonDiv = document.createElement('div')
     buttonDiv.classList.add('mb-3')
     const searchItem = document.createElement('button')
-    searchItem.classList.add('button', 'is-link', 'is-small', 'is-fullwidth')
+    searchItem.classList.add('button', 'is-link', 'is-small', 'is-fullwidth', 'is-size-5')
     // searchItem.textContent = searches[i][0]
     searchItem.textContent = truncateString(searches[i][0])
     buttonDiv.appendChild(searchItem)
